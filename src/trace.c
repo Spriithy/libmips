@@ -80,5 +80,31 @@ void trace(instr_t i) {
           return;
       }
     }
+    case J:
+    case JAL:
+      fprintf(f, "%d\n", (int32_t)J_IMM(i));
+      return;
+    case LUI:
+      fprintf(f, "$%s, %d\n", RN[RT(i)], (int32_t)I_IMM(i));
+      return;
+    case BLEZ:
+    case BGTZ:
+      fprintf(f, "$%s, %d\n", RN[RS(i)], (int32_t)I_IMM(i));
+      return;
+    case BEQ:
+    case BNE:
+      fprintf(f, "$%s, $%s, %d\n", RN[RS(i)], RN[RT(i)], (int32_t)I_IMM(i));
+      return;
+    case ADDI:
+    case ADDIU:
+    case SLTI:
+    case SLTIU:
+    case ANDI:
+    case ORI:
+    case XORI:
+      fprintf(f, "$%s, $%s, %d\n", RN[RT(i)], RN[RS(i)], (int32_t)I_IMM(i));
+      return;
+    default:
+      fprintf(f, "$%s, %d($%s)\n", RN[RT(i)], (int32_t)I_IMM(i), RN[RS(i)]);
   }
 }
