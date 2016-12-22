@@ -40,7 +40,7 @@ typedef int32_t instr_t;
 #define AND 0x24
 #define OR 0x25
 #define XOR 0x26
-#define NOT 0x27
+#define NOR 0x27
 #define SLT 0x2a
 #define SLTU 0x2b
 

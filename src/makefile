@@ -1,2 +1,2 @@
 test:
-	clang -o ../test test.c
+	clang -o ../test *.c
