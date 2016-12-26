@@ -31,11 +31,12 @@ void trace(instr_t i) {
 
   int op = OP(i);
   int funct = FUNCT(i);
+
   char *name = I_INAME[op];
+  if (op == __R) name = R_INAME[funct];
+  fprintf(f, "%-7s ", name);
   switch (op) {
     case __R: {
-      name = R_INAME[funct];
-      fprintf(f, "%-7s ", name);
       switch (funct) {
         case SYSCALL:
           return;
@@ -60,10 +61,11 @@ void trace(instr_t i) {
         case SLL:
         case SRL:
         case SRA:
-          fprintf(f, "$%s, $%s, %u\n", RN[RD(i)], RN[RT(i)], (uint8_t)SHAMT(i));
+          fprintf(f, "$%s, $%s, %u\n", RN[RD(i)], RN[RT(i)], SHAMT(i));
           return;
         case SLLV:
         case SRLV:
+        case SRAV:
           fprintf(f, "$%s, $%s, $%s\n", RN[RD(i)], RN[RT(i)], RN[RS(i)]);
           return;
         case ADD:
@@ -82,18 +84,18 @@ void trace(instr_t i) {
     }
     case J:
     case JAL:
-      fprintf(f, "%d\n", (int32_t)J_IMM(i));
+      fprintf(f, "%d\n", J_IMM(i));
       return;
     case LUI:
-      fprintf(f, "$%s, %d\n", RN[RT(i)], (int32_t)I_IMM(i));
+      fprintf(f, "$%s, %d\n", RN[RT(i)], (int16_t)I_IMM(i));
       return;
     case BLEZ:
     case BGTZ:
-      fprintf(f, "$%s, %d\n", RN[RS(i)], (int32_t)I_IMM(i));
+      fprintf(f, "$%s, %d\n", RN[RS(i)], (int16_t)I_IMM(i));
       return;
     case BEQ:
     case BNE:
-      fprintf(f, "$%s, $%s, %d\n", RN[RS(i)], RN[RT(i)], (int32_t)I_IMM(i));
+      fprintf(f, "$%s, $%s, %d\n", RN[RS(i)], RN[RT(i)], (int16_t)I_IMM(i));
       return;
     case ADDI:
     case ADDIU:
@@ -102,9 +104,11 @@ void trace(instr_t i) {
     case ANDI:
     case ORI:
     case XORI:
-      fprintf(f, "$%s, $%s, %d\n", RN[RT(i)], RN[RS(i)], (int32_t)I_IMM(i));
+      fprintf(f, "$%d, $%d, %d\n", RT(i), RS(i), (int16_t)I_IMM(i));
+      fprintf(stdout, "%-7s", name);
+      fprintf(f, "$%s, $%s, %d\n", RN[RT(i)], RN[RS(i)], (int16_t)I_IMM(i));
       return;
     default:
-      fprintf(f, "$%s, %d($%s)\n", RN[RT(i)], (int32_t)I_IMM(i), RN[RS(i)]);
+      fprintf(f, "$%s, %d($%s)\n", RN[RT(i)], (int16_t)I_IMM(i), RN[RS(i)]);
   }
 }

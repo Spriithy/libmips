@@ -8,8 +8,6 @@ typedef int8_t byte_t;
 typedef uint32_t uword_t;
 typedef int32_t word_t;
 
-typedef uint32_t hilo[2];
-
 #define READ_BYTE(at) (byte_t)(mem[at])
 #define READ_UBYTE(at) (ubyte_t)(mem[at])
 #define READ_HALF(at) (int16_t)((mem[at] << 8) | mem[at + 1])
