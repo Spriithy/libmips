@@ -6,9 +6,9 @@
 typedef int32_t instr_t;
 
 #define OP(i) (uint8_t)((i >> 26) & 0xff)
-#define RS(i) (uint8_t)((i << 6 >> (21 + 6)) & 0xff)
-#define RT(i) (uint8_t)((i << 11 >> (16 + 11)) & 0xff)
-#define RD(i) (uint8_t)((i << 16 >> (11 + 16)) & 0xff)
+#define RS(i) (uint8_t)((i >> 21) & 0x1f)
+#define RT(i) (uint8_t)((i >> 16) & 0x1f)
+#define RD(i) (uint8_t)((i >> 11) & 0x1f)
 #define FUNCT(i) (i & 0x3f)
 #define SHAMT(i) ((i & 0x7c0) >> 6)
 #define I_IMM(i) (i & 0x0000ffff)

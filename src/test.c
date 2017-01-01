@@ -4,6 +4,6 @@
 #include "trace.h"
 
 int main() {
-  instr_t i = GEN_ADDI(18, 14, -9);
+  instr_t i = GEN_ADDI(19, 14, -9);
   trace(i);
 }

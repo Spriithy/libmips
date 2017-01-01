@@ -17,11 +17,11 @@ char R_INAME[][8] = {
 };
 
 char I_INAME[][8] = {
-    PH,     PH,      PH,     "beq", "bne",  "blez", "bgtz", "addi", "addiu",
-    "slti", "sltiu", "andi", "ori", "xori", "lui",  PH,     PH,     PH,
-    PH,     PH,      PH,     PH,    PH,     PH,     PH,     PH,     PH,
-    PH,     PH,      PH,     PH,    "lb",   "lh",   "lw",   PH,     "lbu",
-    "lhu",  PH,      PH,     "sb",  "sh",   PH,     "sw",
+    PH,      PH,     PH,      PH,     "beq", "bne",  "blez", "bgtz", "addi",
+    "addiu", "slti", "sltiu", "andi", "ori", "xori", "lui",  PH,     PH,
+    PH,      PH,     PH,      PH,     PH,    PH,     PH,     PH,     PH,
+    PH,      PH,     PH,      PH,     PH,    "lb",   "lh",   "lw",   PH,
+    "lbu",   "lhu",  PH,      PH,     "sb",  "sh",   PH,     "sw",
 };
 
 FILE *f;
@@ -104,8 +104,6 @@ void trace(instr_t i) {
     case ANDI:
     case ORI:
     case XORI:
-      fprintf(f, "$%d, $%d, %d\n", RT(i), RS(i), (int16_t)I_IMM(i));
-      fprintf(stdout, "%-7s", name);
       fprintf(f, "$%s, $%s, %d\n", RN[RT(i)], RN[RS(i)], (int16_t)I_IMM(i));
       return;
     default:
