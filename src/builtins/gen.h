@@ -4,19 +4,19 @@
 #include "../trace.h"
 
 #define GEN_SLL(rd, rt, shamt) \
-  (SLL | (rt << 11) | (rt << 16) | ((shamt & 0xff) << 6))
+  (SLL | (rd << 11) | (rt << 16) | ((shamt & 0xff) << 6))
 
 #define GEN_SRL(rd, rt, shamt) \
-  (SRL | (rt << 11) | (rt << 16) | ((shamt & 0xff) << 6))
+  (SRL | (rd << 11) | (rt << 16) | ((shamt & 0xff) << 6))
 
 #define GEN_SRA(rd, rt, shamt) \
-  (SRA | (rt << 11) | (rt << 16) | ((shamt & 0xff) << 6))
+  (SRA | (rd << 11) | (rt << 16) | ((shamt & 0xff) << 6))
 
-#define GEN_SLLV(rd, rt, rs) (SLLV | (rt << 16) | (rt << 11) | (rs << 21))
+#define GEN_SLLV(rd, rt, rs) (SLLV | (rt << 16) | (rd << 11) | (rs << 21))
 
-#define GEN_SRLV(rd, rt, rs) (SRLV | (rt << 16) | (rt << 11) | (rs << 21))
+#define GEN_SRLV(rd, rt, rs) (SRLV | (rt << 16) | (rd << 11) | (rs << 21))
 
-#define GEN_SRAV(rd, rt, rs) (SRAV | (rt << 16) | (rt << 11) | (rs << 21))
+#define GEN_SRAV(rd, rt, rs) (SRAV | (rt << 16) | (rd << 11) | (rs << 21))
 
 #define GEN_JR(rs) (JR | (rs << 21))
 
@@ -58,9 +58,9 @@
 
 #define GEN_SLTU(rd, rs, rt) (SLTU | (rt << 16) | (rt << 11) | (rs << 21))
 
-#define GEN_J(ofs) ((J << 26) | ofs)
+#define GEN_J(ofs) ((J << 26) | (J_IMM(ofs) & 0x03ffffff))
 
-#define GEN_JAL(ofs) ((JAL << 26) | J_IMM(ofs))
+#define GEN_JAL(ofs) ((JAL << 26) | (J_IMM(ofs) & 0x03ffffff))
 
 #define GEN_BEQ(rs, rt, ofs) \
   ((BEQ << 26) | (rt << 16) | (rs << 21) | I_IMM(ofs))

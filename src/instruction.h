@@ -12,7 +12,7 @@ typedef int32_t instr_t;
 #define FUNCT(i) (i & 0x3f)
 #define SHAMT(i) ((i & 0x7c0) >> 6)
 #define I_IMM(i) (i & 0x0000ffff)
-#define J_IMM(i) (i & 0x03ffffff)
+#define J_IMM(i) (i & 0x03ffffff) | ((i >> 25) & 0x1 ? 0xfc000000 : 0)
 
 #define __R 0x00
 

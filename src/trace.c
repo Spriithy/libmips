@@ -34,11 +34,15 @@ void trace(instr_t i) {
 
   char *name = I_INAME[op];
   if (op == __R) name = R_INAME[funct];
+  if (op == J) name = "j";
+  if (op == JAL) name = "jal";
   fprintf(f, "%-7s ", name);
+
   switch (op) {
     case __R: {
       switch (funct) {
         case SYSCALL:
+          printf("\n");
           return;
         case MFHI:
         case MFLO:
