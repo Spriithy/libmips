@@ -100,7 +100,7 @@ char* dump_raw_instr(uint32_t i)
         case BGEZAL:
         case BLTZALL:
         case BGEZALL:
-            sprintf(str, "%-7s%s, %d", NAME, RS, S_IMM);
+            sprintf(str, "%-7s%s, %d", NAME, RS, S_IMM << 2);
             break;
         case TGEIU:
         case TLTIU:
@@ -110,15 +110,15 @@ char* dump_raw_instr(uint32_t i)
         break;
     case J:
     case JAL:
-        sprintf(str, "%-7s%d", NAME, (int32_t)DECODE_IMM_J(i));
+        sprintf(str, "%-7s%d", NAME, (int32_t)DECODE_IMM_J(i) << 2);
         break;
     case BEQ:
     case BNE:
-        sprintf(str, "%-7s%s, %s, %d", NAME, RT, RS, S_IMM);
+        sprintf(str, "%-7s%s, %s, %d", NAME, RT, RS, S_IMM << 2);
         break;
     case BLEZ:
     case BGTZ:
-        sprintf(str, "%-7s%s, %d", NAME, RT, S_IMM);
+        sprintf(str, "%-7s%s, %d", NAME, RT, S_IMM << 2);
         break;
     case ADDI:
     case SLTI:
@@ -128,7 +128,7 @@ char* dump_raw_instr(uint32_t i)
     case BNEL:
     case BLEZL:
     case BGTZL:
-        sprintf(str, "%-7s%s, %s, %d", NAME, RT, RS, S_IMM);
+        sprintf(str, "%-7s%s, %s, %d", NAME, RT, RS, S_IMM << 2);
         break;
     case ADDIU:
     case SLTIU:
