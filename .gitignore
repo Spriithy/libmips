@@ -1,6 +1,6 @@
-Debug/
-Release/
-*.a
+
+*/**/*.a
+*/**/*.o
 .cproject
 .project
 .settings/
