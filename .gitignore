@@ -4,3 +4,10 @@
 .cproject
 .project
 .settings/
+
+debug/Debug
+debug/Release
+
+release/Debug
+release/Release
+
