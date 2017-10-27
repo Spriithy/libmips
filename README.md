@@ -10,7 +10,7 @@ cd release
 make all
 ```
 
-This will generate a file named `libmips.a`.
+This will generate a file named `libmips.a` under the `build/` folder.
 
 **Note**: *you can alternatively do the same in `debug/` to produce a debug build.*
 
