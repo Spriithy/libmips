@@ -9,8 +9,6 @@ RM := rm
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
--include Release/src/subdir.mk
--include Debug/src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -34,12 +32,17 @@ libmips.a: $(OBJS) $(USER_OBJS)
 	ar -r  "libmips.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
+	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
 	-$(RM) $(ARCHIVES)$(OBJS)$(C_DEPS) libmips.a
 	-@echo ' '
 
-.PHONY: all clean dependents
+post-build:
+	-mkdir -p ../build && mv libmips.a ../build
+	-@echo ' '
+
+.PHONY: all clean dependents post-build
 
 -include ../makefile.targets

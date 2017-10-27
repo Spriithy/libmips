@@ -32,12 +32,17 @@ libmips.a: $(OBJS) $(USER_OBJS)
 	ar -r  "libmips.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
+	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
 	-$(RM) $(ARCHIVES)$(OBJS)$(C_DEPS) libmips.a
 	-@echo ' '
 
-.PHONY: all clean dependents
+post-build:
+	-mkdir -p ../build && mv libmips.a ../build
+	-@echo ' '
+
+.PHONY: all clean dependents post-build
 
 -include ../makefile.targets

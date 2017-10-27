@@ -1,6 +1,8 @@
 
 */**/*.a
 */**/*.o
+*/**/*.d
+
 .cproject
 .project
 .settings/
@@ -11,3 +13,6 @@ debug/Release
 release/Debug
 release/Release
 
+build/
+/debug/
+/release/
